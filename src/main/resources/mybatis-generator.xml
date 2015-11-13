@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 指定驱动的路径 -->
+    <classPathEntry location="src/main/resources/lib/mysql-connector-java-5.1.37.jar"/>
+    <!--导入属性配置 -->
+    <context id="default" targetRuntime="MyBatis3">
+        <!-- 创建class时，对注释进行控制 -->
+        <commentGenerator>
+            <!-- 阻止生成的注释包含时间戳，防止每次代码都不一样导致SVN提交 -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!--jdbc的数据库连接 -->
+        <jdbcConnection driverClass="${maven.database.driverClassName}" connectionURL="${maven.database.url}" userId="${maven.database.username}" password="${maven.database.password}"/>
+        <!-- Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类
+            targetPackage     指定生成的model生成所在的包名
+            targetProject     指定在该项目下所在的路径  -->
+        <javaModelGenerator targetPackage="com.iwhere.mybatis.model" targetProject="src/main/java">
+            <!-- 是否对model添加 构造函数 -->
+            <property name="constructorBased" value="true"/>
+            <!-- 给Model添加一个父类 -->
+            <!--<property name="rootClass" value="com.iwhere.base"/>-->
+        </javaModelGenerator>
+        <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
+        <sqlMapGenerator targetPackage="com.iwhere.mybatis.dao.mapping" targetProject="src/main/java"/>
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+            type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+            type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+            type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口 -->
+        <javaClientGenerator targetPackage="com.iwhere.mybatis.dao" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 要自动生成的表 +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <table tableName="ia_addresses" >
+            <generatedKey column="addressId" sqlStatement="MySql"/>
+        </table>
+        <table tableName="ia_album">
+            <generatedKey column="album_id" sqlStatement="MySql"/>
+        </table>
+        <table tableName="ia_collected">
+            <generatedKey column="collectId" sqlStatement="MySql"/>
+        </table>
+        <table tableName="ia_categories">
+            <generatedKey column="categoryId" sqlStatement="MySql"/>
+        </table>
+    </context>
+</generatorConfiguration>
