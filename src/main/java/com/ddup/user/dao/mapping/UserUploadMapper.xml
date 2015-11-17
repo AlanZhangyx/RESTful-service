@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddup.user.dao.UserUploadMapper">
+	<resultMap id="BaseResultMap" type="com.ddup.user.dao.model.UserUpload">
+		<constructor>
+			<idArg column="upload_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+			<arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+			<arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="upload_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+			<arg column="upload_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="lng" jdbcType="DOUBLE" javaType="java.lang.Double" />
+			<arg column="lat" jdbcType="DOUBLE" javaType="java.lang.Double" />
+			<arg column="geo_level" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="geo_num" jdbcType="BIGINT" javaType="java.lang.Long" />
+			<arg column="iwcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="resource_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+		</constructor>
+	</resultMap>
+	<sql id="Base_Column_List">
+		upload_id, user_id, remark, upload_time, upload_type, lng, lat, geo_level,
+		geo_num,
+		iwcode, resource_id
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_upload
+		where upload_id = #{uploadId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from user_upload
+		where upload_id = #{uploadId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.ddup.user.dao.model.UserUpload">
+		<selectKey resultType="java.lang.Long" keyProperty="uploadId"
+			order="BEFORE">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into user_upload (upload_id, user_id, remark,
+		upload_time, upload_type, lng,
+		lat, geo_level, geo_num,
+		iwcode, resource_id)
+		values (#{uploadId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		#{remark,jdbcType=VARCHAR},
+		#{uploadTime,jdbcType=TIMESTAMP}, #{uploadType,jdbcType=INTEGER}, #{lng,jdbcType=DOUBLE},
+		#{lat,jdbcType=DOUBLE}, #{geoLevel,jdbcType=INTEGER},
+		#{geoNum,jdbcType=BIGINT},
+		#{iwcode,jdbcType=VARCHAR}, #{resourceId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ddup.user.dao.model.UserUpload">
+		<selectKey resultType="java.lang.Long" keyProperty="uploadId"
+			order="BEFORE">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into user_upload
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			upload_id,
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="uploadTime != null">
+				upload_time,
+			</if>
+			<if test="uploadType != null">
+				upload_type,
+			</if>
+			<if test="lng != null">
+				lng,
+			</if>
+			<if test="lat != null">
+				lat,
+			</if>
+			<if test="geoLevel != null">
+				geo_level,
+			</if>
+			<if test="geoNum != null">
+				geo_num,
+			</if>
+			<if test="iwcode != null">
+				iwcode,
+			</if>
+			<if test="resourceId != null">
+				resource_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{uploadId,jdbcType=BIGINT},
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="uploadTime != null">
+				#{uploadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uploadType != null">
+				#{uploadType,jdbcType=INTEGER},
+			</if>
+			<if test="lng != null">
+				#{lng,jdbcType=DOUBLE},
+			</if>
+			<if test="lat != null">
+				#{lat,jdbcType=DOUBLE},
+			</if>
+			<if test="geoLevel != null">
+				#{geoLevel,jdbcType=INTEGER},
+			</if>
+			<if test="geoNum != null">
+				#{geoNum,jdbcType=BIGINT},
+			</if>
+			<if test="iwcode != null">
+				#{iwcode,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceId != null">
+				#{resourceId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ddup.user.dao.model.UserUpload">
+		update user_upload
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="uploadTime != null">
+				upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uploadType != null">
+				upload_type = #{uploadType,jdbcType=INTEGER},
+			</if>
+			<if test="lng != null">
+				lng = #{lng,jdbcType=DOUBLE},
+			</if>
+			<if test="lat != null">
+				lat = #{lat,jdbcType=DOUBLE},
+			</if>
+			<if test="geoLevel != null">
+				geo_level = #{geoLevel,jdbcType=INTEGER},
+			</if>
+			<if test="geoNum != null">
+				geo_num = #{geoNum,jdbcType=BIGINT},
+			</if>
+			<if test="iwcode != null">
+				iwcode = #{iwcode,jdbcType=VARCHAR},
+			</if>
+			<if test="resourceId != null">
+				resource_id = #{resourceId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where upload_id = #{uploadId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ddup.user.dao.model.UserUpload">
+		update user_upload
+		set user_id = #{userId,jdbcType=BIGINT},
+		remark = #{remark,jdbcType=VARCHAR},
+		upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+		upload_type = #{uploadType,jdbcType=INTEGER},
+		lng = #{lng,jdbcType=DOUBLE},
+		lat = #{lat,jdbcType=DOUBLE},
+		geo_level = #{geoLevel,jdbcType=INTEGER},
+		geo_num = #{geoNum,jdbcType=BIGINT},
+		iwcode = #{iwcode,jdbcType=VARCHAR},
+		resource_id = #{resourceId,jdbcType=BIGINT}
+		where upload_id = #{uploadId,jdbcType=BIGINT}
+	</update>
+</mapper>
