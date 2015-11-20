@@ -73,11 +73,26 @@
 		</dependency> -->
 
         <!-- 4 spring compile:默认范围编译/测试/运行都有效 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>        
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -165,12 +180,12 @@
             <version>${jackson.version}</version>
         </dependency>
         
-		<!-- 8 JNative START
+		<!-- 8 JNative START -->
 		<dependency>
 			<groupId>local.JNative</groupId>
 			<artifactId>JNative</artifactId>
 			<version>1.0</version>
-		</dependency> -->
+		</dependency>
         
         <!-- 9 file -->
         <dependency>
@@ -204,9 +219,9 @@
 			<properties>
 				<!-- 开发环境的数据库配置 -->
 				<maven.database.driverClassName>com.mysql.jdbc.Driver</maven.database.driverClassName>
-				<maven.database.url>jdbc:mysql://*:3306/thz_dev?characterEncoding=UTF-8</maven.database.url>
-				<maven.database.username></maven.database.username>
-				<maven.database.password></maven.database.password>
+				<maven.database.url>jdbc:mysql://ddupdb.mysql.rds.aliyuncs.com:3306/thz_dev?characterEncoding=UTF-8</maven.database.url>
+				<maven.database.username>user_dev</maven.database.username>
+				<maven.database.password>user_thz_4871_ts</maven.database.password>
 				<!-- 日志级别 -->
 				<maven.log.level>INFO</maven.log.level>
 			</properties>
@@ -217,9 +232,9 @@
 			<properties>
 				<!-- 部署境的数据库配置 -->
 				<maven.database.driverClassName>com.mysql.jdbc.Driver</maven.database.driverClassName>
-				<maven.database.url>jdbc:mysql://*:3306/thz_dev?characterEncoding=UTF-8</maven.database.url>
-				<maven.database.username></maven.database.username>
-				<maven.database.password></maven.database.password>
+				<maven.database.url>jdbc:mysql://ddupdb.mysql.rds.aliyuncs.com:3306/thz_dev?characterEncoding=UTF-8</maven.database.url>
+				<maven.database.username>user_dev</maven.database.username>
+				<maven.database.password>user_thz_4871_ts</maven.database.password>
 				<!-- 日志级别 -->
 				<maven.log.level>ERROR</maven.log.level>
 				<!-- War 包名称 -->
@@ -273,6 +288,7 @@
 			</plugin>
 			
         	<!-- mybatis-generator 自动代码插件 -->
+        	<!-- maven goals:mybatis-generator:generate -->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
