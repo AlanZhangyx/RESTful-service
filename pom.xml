@@ -144,12 +144,12 @@
             <version>${jackson.version}</version>
         </dependency>
         
-		<!-- 8 JNative START -->
+		<!-- 8 JNative START
 		<dependency>
 			<groupId>local.JNative</groupId>
 			<artifactId>JNative</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency> -->
         
         <!-- 9 file -->
         <dependency>
