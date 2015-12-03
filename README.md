@@ -2,8 +2,8 @@
 ### Build a RESTful-servcie framework project which based java language.
 ************************************************************************
 ### Framework content：
-* Based MAVEN + SPRING + SPRING-MVC + MYBATIS.
- * MAVEN : Muti-environment profiles, tomcat7-plugin
+* Based MAVEN + SPRING + SPRING-MVC + MYBATIS
+ * MAVEN : Muti-environment profiles, tomcat7-plugin.
  * SPRING : Jackson, aspectj, spirng-test, spring-tx.
  * MYBATIS : mybatis-generator, pagehelper.
  * OTHERS : log4j, hibernate-validator.

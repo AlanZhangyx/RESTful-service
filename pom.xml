@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ddup</groupId>
-	<artifactId>istar</artifactId>
+	<artifactId>RESTful-service</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>istar Maven Webapp</name>
@@ -11,7 +11,8 @@
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++项目properties配置++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<properties>
 		<!-- 定义项目war包名字 -->
-        <war.warname>istar</war.warname>
+		<!-- 这里不能与profile中properties文件定义中warname一样,会让插件无法找到源头引起recursive错误 -->
+        <war.name>rest</war.name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- java version -->
         <java.version>1.7</java.version>
@@ -193,62 +194,70 @@
 
     </dependencies>
     
+    
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++profiles+++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- 利用MVN的resources+filtering和profile实现不同环境使用不同配置文件 -->
+    
+	<!-- 1. 为编译器插件compiler<定义>不同的环境(dev/test/prot)配置文件 -->
 	<profiles>
+		<!-- profile用法：在相关mvn命令最后使用" -PprofileId"来激活相应的profile -->
+		<!-- 1. 开发环境 -->
 		<profile>
 			<id>dev</id>
 			<activation>
 				<!-- 默认激活开发环境 -->
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
+			<!-- 环境properties(可以是properties文件),其值用于替换项目资源文件中的值(使用EL,也是properties) -->
 			<properties>
-				<!-- 开发环境的数据库配置 -->
 				<maven.database.driverClassName>com.mysql.jdbc.Driver</maven.database.driverClassName>
-				<maven.database.url>jdbc:mysql://*:3306/thz_dev?characterEncoding=UTF-8</maven.database.url>
-				<maven.database.username></maven.database.username>
-				<maven.database.password></maven.database.password>
+				<maven.database.url>jdbc:mysql://localhost:3306/*_dev?characterEncoding=UTF-8</maven.database.url>
+				<maven.database.username>*_dev</maven.database.username>
+				<maven.database.password>*</maven.database.password>
 				<!-- 日志级别 -->
 				<maven.log.level>INFO</maven.log.level>
 			</properties>
 		</profile>
+		<!-- 2. 测试环境 -->
+		<!-- 3. 生产环境 -->
 		<profile>
-			<!-- 使用时相关命令后加上 -Ppg -->
-			<id>pg</id>
+			<id>prot</id>
 			<properties>
-				<!-- 部署境的数据库配置 -->
 				<maven.database.driverClassName>com.mysql.jdbc.Driver</maven.database.driverClassName>
-				<maven.database.url>jdbc:mysql://*:3306/thz_dev?characterEncoding=UTF-8</maven.database.url>
-				<maven.database.username></maven.database.username>
-				<maven.database.password></maven.database.password>
-				<!-- 日志级别 -->
+				<maven.database.url>jdbc:mysql://localhost:3306/*?characterEncoding=UTF-8</maven.database.url>
+				<maven.database.username>*</maven.database.username>
+				<maven.database.password>*</maven.database.password>
 				<maven.log.level>ERROR</maven.log.level>
-				<!-- War 包名称 -->
-				<war.warname>${war.warname}</war.warname>
-				<!-- 打包排除文件 -->
+				<!-- war包名 -->
+				<war.warname>${war.name}</war.warname>
+				<!-- war包排除文件 -->
 				<package.warSourceExcludes>WEB-INF/log/**</package.warSourceExcludes>
 			</properties>
 		</profile>
 	</profiles>
 	
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++build++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- 2 <确定>使用的设置。构建build的配置 -->
     <build>
+    	<!-- 1 指定项目名,默认是artifactId + version(如果不配置war插件，war也会用) -->
         <finalName>${project.artifactId}</finalName>
-        <!-- resources -->
-		<resources>
+        
+        <!-- 2 resources:指定什么是需要编译的资源 -->
+        <resources>
+        	<!-- 1 java -->
 			<resource>
 				<directory>${project.basedir}/src/main/java</directory>
+				<!-- 启动资源替换，用profile信息替换配置文件信息 -->
 				<filtering>true</filtering>
-				<!-- 包含的文件!默认src/main/java 下只会编译java文件，会导致除java的其他如xml或者 properties文件可能某些情况不打包的情况发生 -->
+				<!-- 包含的文件,一般无需指定,某些情况下xml或者 properties文件有可能不被视为编译资源 -->
 				<includes>
-					<!-- mybatis xml -->
-					<include>**/*.xml</include>
-					<!-- i18n 配置 -->
-					<include>**/messages_*.properties</include>
+					<!-- 匹配所有文件 -->
+					<include>**/*</include>
 				</includes>
 			</resource>
+			<!-- 2 resources -->
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
-				<!-- 启动资源替换，用profile信息替换配置文件信息 -->
 				<filtering>true</filtering>
                 <!-- 排除文件 -->
                 <excludes>
@@ -258,21 +267,22 @@
                 </excludes>
 			</resource>
 		</resources>
-		<!-- plugins -->
+		
+		<!-- 3 个性化设置插件 -->
         <plugins>
-        	<!-- maven整合tomcat7 -->
+        	<!-- 1. maven整合tomcat7 -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
 					<port>8080</port>
-					<path>/${war.warname}</path>
+					<path>/${war.name}</path>
 					<uriEncoding>UTF-8</uriEncoding>
 				</configuration>
 			</plugin>
 			
-        	<!-- mybatis-generator 自动代码插件 -->
+        	<!-- 2. mybatis-generator 自动代码插件 -->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -285,8 +295,8 @@
                 </configuration>
             </plugin>
             
-            <!-- maven compile pulgin:maven的update project不会使用Eclipse指定的jdk compile version -->
-            <!-- 有了这个插件指定的target版本，使用maven的update才能正确用指定的JDK版本 -->
+            <!-- 3. compiler插件默认使用1.5JDK编译,自己设置编译器JDK版本 -->
+            <!-- Maven->Update Projects过程中有compile步骤,指定了这里才能正确编译 -->
             <plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-compiler-plugin</artifactId>
@@ -296,6 +306,19 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            
+            <!-- 4. 打包插件个性化配置 -->
+            <!-- package命令根据不同的包格式ejb/jar/rar/war选择不同的插件,这里配置war打包插件 -->
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<warName>${war.name}</warName>
+					<!-- 打包时排除 日志文件夹 和 上传目录 文件夹 -->
+					<warSourceExcludes>${package.warSourceExcludes}</warSourceExcludes>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 </project>
