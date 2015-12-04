@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- 指定驱动的路径 -->
     <classPathEntry location="src/main/resources/lib/mysql-connector-java-5.1.9.jar"/>
@@ -11,13 +12,14 @@
     
         <!-- 自动生成的注释无用，不要 是否去除自动生成的注释 true：是 ： false:否 -->
         <commentGenerator>
+        	<!-- 阻止生成的注释包含时间戳，防止每次代码都不一样导致SVN提交 -->
             <property name="suppressDate" value="true"/>
-            <property name="suppressAllComments" value="true"/>
+            <!-- 如果有可能覆盖运行本插件就不要关闭注释，因为没有注解@mbggenerated会导致追加生成而不是覆盖 -->
+            <property name="suppressAllComments" value="false"/>
         </commentGenerator>
         
         <!--jdbc的数据库连接 -->
-        <!-- <jdbcConnection driverClass="${maven.database.driverClassName}" connectionURL="${maven.database.url}" userId="${maven.database.username}" password="${maven.database.password}"/> -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://ddupdb.mysql.rds.aliyuncs.com:3306/thz_dev?characterEncoding=UTF-8" userId="user_dev" password="user_thz_4871_ts"/>
+        <jdbcConnection driverClass="${maven.database.driverClassName}" connectionURL="${maven.database.url}" userId="${maven.database.username}" password="${maven.database.password}"/>
         
         <!-- 是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal -->
         <javaTypeResolver>
