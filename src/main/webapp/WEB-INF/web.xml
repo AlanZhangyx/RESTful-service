@@ -73,7 +73,7 @@
 	<!-- 不拦截静态文件 -->
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
-		<url-pattern>*.ico</url-pattern>
+		<url-pattern>*.icon</url-pattern>
 		<url-pattern>*.txt</url-pattern>
 		<url-pattern>*.xml</url-pattern>
 		<url-pattern>*.htm</url-pattern>

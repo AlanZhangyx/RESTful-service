@@ -5,7 +5,7 @@
 	<artifactId>RESTful-service</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>istar Maven Webapp</name>
+	<name>RESTful-service Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++项目properties配置++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -22,6 +22,7 @@
 	</properties>
 	
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++依赖管理++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- http://search.maven.org/ http://repo1.maven.org/maven2/ -->
 	<dependencies>
     	<!-- 1 servlet jsp -->
 		<dependency>
