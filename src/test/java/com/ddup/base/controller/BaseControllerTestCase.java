@@ -17,20 +17,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Map;
 
 /**
+ *
  * <br>
- * <strong>copyright</strong>： 2015, 成都都在哪网讯科技有限公司<br>
- * <strong>Time </strong>: 2015/11/3 11:01<br>
+ * <strong>copyright</strong>： 2015, 北京都在哪网讯科技有限公司<br>
+ * <strong>Time </strong>: 2015年12月15日<br>
  * <strong>History</strong>：<br>
  * Editor　　　version　　　Time　　　　　Operation　　　　　　　Description<br>
  *
- * @author hewei
+ * @author dznzyx
  * @version : 1.0.0
  */
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:spring-context.xml", "classpath:spring-mvc.xml", "classpath:spring-mybatis.xml"})
 public class BaseControllerTestCase {
     @Autowired
-    protected WebApplicationContext applicationContext;
+    protected WebApplicationContext webApplicationContext;
     // mvc
     protected MockMvc mvc;
     // json 解析器
@@ -41,7 +42,7 @@ public class BaseControllerTestCase {
      */
     @Before
     public void before() {
-        this.mvc = MockMvcBuilders.webAppContextSetup(applicationContext).build();
+        this.mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         this.objectMapper = new ObjectMapper();
     }
 

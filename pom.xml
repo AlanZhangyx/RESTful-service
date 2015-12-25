@@ -212,9 +212,9 @@
 			<!-- 环境properties(可以是properties文件),其值用于替换项目资源文件中的值(使用EL,也是properties) -->
 			<properties>
 				<maven.database.driverClassName>com.mysql.jdbc.Driver</maven.database.driverClassName>
-				<maven.database.url>jdbc:mysql://localhost:3306/*_dev?characterEncoding=UTF-8</maven.database.url>
-				<maven.database.username>*_dev</maven.database.username>
-				<maven.database.password>*</maven.database.password>
+				<maven.database.url>jdbc:mysql://localhost:3306/casual?characterEncoding=UTF-8</maven.database.url>
+				<maven.database.username>root</maven.database.username>
+				<maven.database.password>root</maven.database.password>
 				<!-- 日志级别 -->
 				<maven.log.level>INFO</maven.log.level>
 			</properties>

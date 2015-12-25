@@ -3,6 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
+	<!-- GUI工具可能会采用这个名字来显示项目名 -->
 	<display-name>RESTful-service</display-name>
 	<!-- 设置root变量名 -->
 	<context-param>
@@ -62,6 +63,7 @@
                 classpath:spring-mybatis.xml
             </param-value> -->
 		</init-param>
+		<!-- 某些servlet希望在client访问前就被初始化，即服务器启动时，当然你还希望指定这些servlet中哪一个执行 -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
