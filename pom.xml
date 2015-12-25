@@ -167,12 +167,12 @@
             <version>${jackson.version}</version>
         </dependency>
         
-		<!-- 8 JNative START
+		<!-- 8 JNA:Java Native Access -->
 		<dependency>
-			<groupId>local.JNative</groupId>
-			<artifactId>JNative</artifactId>
-			<version>1.0</version>
-		</dependency> -->
+		    <groupId>net.java.dev.jna</groupId>
+		    <artifactId>jna</artifactId>
+		    <version>4.2.1</version>
+		</dependency>
         
         <!-- 9 file -->
         <dependency>
