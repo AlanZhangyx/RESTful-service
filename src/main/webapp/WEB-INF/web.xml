@@ -26,10 +26,10 @@
 
 	<!-- Spring容器和Log4j监听器 -->
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 	<!-- 编码过滤器 -->
