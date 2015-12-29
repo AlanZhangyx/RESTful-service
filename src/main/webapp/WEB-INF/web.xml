@@ -8,7 +8,7 @@
 	<!-- 设置root变量名 -->
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>web.root</param-value>
+		<param-value>rest.root</param-value>
 	</context-param>
 	<!-- log4j配置 -->
 	<context-param>
@@ -86,6 +86,9 @@
 	<session-config>
 		<session-timeout>20</session-timeout>
 	</session-config>
+	<listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
