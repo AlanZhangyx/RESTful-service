@@ -2,6 +2,8 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
     "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
+    <!-- maven goals:mybatis-generator:generate -->
+
     <!-- 指定驱动的路径 -->
     <classPathEntry location="src/main/resources/lib/mysql-connector-java-5.1.9.jar"/>
     <!--导入属性配置 -->
@@ -29,7 +31,7 @@
         <!-- Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径  -->
-        <javaModelGenerator targetPackage="com.ddup.user.dao.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.ddup.casual.dao.model" targetProject="src/main/java">
             <!-- 是否对model添加 构造函数 -->
             <property name="constructorBased" value="true"/>
             <!-- 给Model添加一个父类 -->
@@ -56,15 +58,13 @@
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 要自动生成的表 +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
         <!-- 要生成哪些表 全部为tableName="%" -->
         <!-- enableXXX:XXX代表多种SQL方法，该属性用来指定是否生成对应的XXX语句 -->
-        <table tableName="user_position" domainObjectName="UserPosition" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="position_id" sqlStatement="MySql"/>
+        <table tableName="sys_privilege" domainObjectName="Privilege" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <!-- 列重命名<columnRenamingRule searchString="^CUST_" replaceString="" /> -->
+            <generatedKey column="id" sqlStatement="MySql"/>
         </table>
-        <table tableName="user_upload" domainObjectName="UserUpload" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="upload_id" sqlStatement="MySql"/>
+        <table tableName="sys_role" domainObjectName="Role" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
-        <table tableName="user_video" domainObjectName="UserVideo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="video_id" sqlStatement="MySql"/>
+        <table tableName="sys_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
-        
     </context>
 </generatorConfiguration>

@@ -60,19 +60,19 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.9</version>
+            <version>5.1.38</version>
             <scope>runtime</scope>
         </dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
-		</dependency>
-		<!-- <dependency>
+		</dependency> -->
+		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>1.0.16</version>
-		</dependency> -->
+		</dependency>
 
         <!-- 4 spring compile:默认范围编译/测试/运行都有效 -->
         <dependency>
@@ -141,7 +141,7 @@
 	    <dependency>
 	        <groupId>log4j</groupId>
 	        <artifactId>log4j</artifactId>
-	        <version>1.2.9</version>
+	        <version>1.2.17</version>
 	    </dependency>
 	    
         <!-- 7 json-lib is convenient,but jackson is spring annotation用来解析返回json数据的 -->  
@@ -167,11 +167,11 @@
             <version>${jackson.version}</version>
         </dependency>
         
-		<!-- 8 JNative START
+		<!-- 8 JNA:Java Native Access
 		<dependency>
-			<groupId>local.JNative</groupId>
-			<artifactId>JNative</artifactId>
-			<version>1.0</version>
+		    <groupId>net.java.dev.jna</groupId>
+		    <artifactId>jna</artifactId>
+		    <version>4.2.1</version>
 		</dependency> -->
         
         <!-- 9 file -->
@@ -212,9 +212,9 @@
 			<!-- 环境properties(可以是properties文件),其值用于替换项目资源文件中的值(使用EL,也是properties) -->
 			<properties>
 				<maven.database.driverClassName>com.mysql.jdbc.Driver</maven.database.driverClassName>
-				<maven.database.url>jdbc:mysql://localhost:3306/*_dev?characterEncoding=UTF-8</maven.database.url>
-				<maven.database.username>*_dev</maven.database.username>
-				<maven.database.password>*</maven.database.password>
+				<maven.database.url>jdbc:mysql://localhost:3306/casual?characterEncoding=UTF-8</maven.database.url>
+				<maven.database.username>root</maven.database.username>
+				<maven.database.password>root</maven.database.password>
 				<!-- 日志级别 -->
 				<maven.log.level>INFO</maven.log.level>
 			</properties>
