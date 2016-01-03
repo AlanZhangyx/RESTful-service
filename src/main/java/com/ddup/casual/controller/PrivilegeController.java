@@ -26,9 +26,9 @@ import com.ddup.casual.dto.resp.PrivilegeResp01;
 @Controller
 @RequestMapping(value = "/pri", method = { RequestMethod.GET,RequestMethod.PUT })
 public class PrivilegeController extends BaseController{
-	
+		
 	@RequestMapping(value = "/list")
-    public @ResponseBody PrivilegeResp01 queryList(@Validated(QueryList.class) PrivilegeReq dtoReq){
-		return null;
+	public @ResponseBody PrivilegeResp01 queryList(@Validated(QueryList.class) PrivilegeReq dtoReq){
+		return new PrivilegeResp01();
 	}
 }
