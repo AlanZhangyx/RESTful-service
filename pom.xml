@@ -265,6 +265,8 @@
                     <!-- mybatis 自动构建代码用，只在开发阶段使用 -->
                     <exclude>mybatis-generator.xml</exclude>
                     <exclude>lib/mysql-connector-java-5.1.9.jar</exclude>
+                    <!-- rebel 文件 -->
+                    <exclude>rebel.xml</exclude>
                 </excludes>
 			</resource>
 		</resources>
