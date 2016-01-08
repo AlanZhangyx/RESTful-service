@@ -20,9 +20,12 @@
         <property name="defaultEncoding" value="UTF-8"/>
         <!-- basename i18n 资源文件前半部分文件名称 从classpath开始 -->
         <property name="basename" value="i18n.messages" />
-        <!-- 如果 i18n 找不到对应的资源文件，采用默认的key 作为message输出 -->
-        <property name="useCodeAsDefaultMessage" value="true" />
+        <!-- 是否显示默认的key作为message输出而不是消息，默认false -->
+        <property name="useCodeAsDefaultMessage" value="false" />
     </bean>
+    
+    <!-- 基于请求参数(default:locale)的国际化拦截器，这里是spring validate最终会调用 -->
+    <bean id="localeResolver" class="com.ddup.lib.CasualLocaleResolver"/>    
     
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
     <!-- 1. 映射处理器 -->
@@ -30,8 +33,8 @@
         <!-- 拦截器 Interceptors -->
         <property name="interceptors">
             <list>
-                <!-- i18n -->
-                <!-- 国际化操作 拦截器 必需配置，可以和其它国际化方式通用 -->
+                <!-- 国际化操作 拦截器 必需配置
+                	这个拦截器会根据其默认key:locale从request中获取值，接着调用一个可用的localeResolver的setLocale进行设置locale  -->
                 <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
             </list>
         </property>

@@ -197,6 +197,19 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.2.2.Final</version>
 		</dependency>
+		
+		<!-- 11 ehcache:其依赖SLF4J会使mybatis选择它而忽略log4j -->
+		<!-- <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.10.1</version>
+		</dependency> -->
+        <!-- SLF4J实际上是接口:它允许我们使用log4j实现而不直接使用slf4j，这样就没有11的问题了 -->
+	    <!-- <dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-log4j12</artifactId>
+	        <version>1.7.13</version>
+	    </dependency> -->
 
     </dependencies>
     
