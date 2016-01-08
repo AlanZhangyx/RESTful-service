@@ -3,15 +3,20 @@
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
        
     <!-- 仅scan所有的@controller -->
     <context:component-scan base-package="com.ddup" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
     </context:component-scan>
+    
+    <!-- Aspect支持 （动态切面接入支持）,指定使用CGLIB -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
     
     <!-- ++++++++++++++++++++++++++++++++++++++ i18n start +++++++++++++++++++++++++++++++++++++++++ -->
     <!-- i18n 资源文件 -->

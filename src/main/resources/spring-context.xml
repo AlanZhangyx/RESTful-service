@@ -9,9 +9,6 @@
        
     <!-- 声明使用注解的风格 -->
     <context:annotation-config />
-
-    <!-- Aspect支持 （动态切面接入支持） -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
     
     <!-- 扫描@Service和@Repository -->
     <context:component-scan base-package="com.ddup" use-default-filters="false">
