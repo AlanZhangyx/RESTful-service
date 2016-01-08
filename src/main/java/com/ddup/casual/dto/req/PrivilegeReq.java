@@ -12,8 +12,7 @@ public class PrivilegeReq extends BaseReq {
 
 	/***************************** validation groups *******************************/
 
-	public interface QueryList {
-	}// QueryList
+	public interface QueryList {}// QueryList
 
 	/**************************** fields *******************************/
 

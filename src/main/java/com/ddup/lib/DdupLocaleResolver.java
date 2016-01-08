@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 
-public class CasualLocaleResolver implements LocaleResolver {
+public class DdupLocaleResolver implements LocaleResolver {
 	
 	//一个key，其值存储的是一次请求中的Locale
-	private static final String LOCALE_REQUEST_ATTRIBUTE_NAME = CasualLocaleResolver.class.getName() + ".LOCALE";
+	private static final String LOCALE_REQUEST_ATTRIBUTE_NAME = DdupLocaleResolver.class.getName() + ".LOCALE";
 	// 默认参数名称
 	public static final String DEFAULT_PARAM_NAME = "locale";
 	// 默认语言

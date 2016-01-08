@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver;
 
 import com.ddup.base.dto.resp.BaseResp;
-import com.ddup.lib.exception.CasualException;
+import com.ddup.lib.exception.DdupException;
 
 /**
  * 全局异常处理类
@@ -33,7 +33,7 @@ import com.ddup.lib.exception.CasualException;
  * @version : 1.0.0
  */
 @Component
-public class CasualHandlerMethodExceptionResolver extends AbstractHandlerMethodExceptionResolver {
+public class DdupHandlerMethodExceptionResolver extends AbstractHandlerMethodExceptionResolver {
 
 
     /**
@@ -64,20 +64,20 @@ public class CasualHandlerMethodExceptionResolver extends AbstractHandlerMethodE
         // ---------------------------- 处理解析异常，并用Json返回 --------------------------------------
         BaseResp resp = new BaseResp();
         // 业务异常
-        if (ex instanceof CasualException) {
-        	CasualException exception = (CasualException)ex;
+        if (ex instanceof DdupException) {
+        	DdupException exception = (DdupException)ex;
             resp.setServer_status(exception.getErrorCode());//默认500
             resp.setServer_error(exception.getLocalizedMessage());
         } 
         // 验证异常
         else if (ex instanceof BindException) {
             BindException exception = (BindException) ex;
-            resp.setServer_status(CasualException.ERROR_VALIDATE);
+            resp.setServer_status(DdupException.ERROR_VALIDATE);
             resp.setServer_error(exception.getFieldError().getDefaultMessage());
         }
         // 其他系统崩溃异常
         else {  
-            resp.setServer_status(CasualException.ERROR_DEFAULT);
+            resp.setServer_status(DdupException.ERROR_DEFAULT);
             resp.setServer_error("系统崩溃异常！");
             // 记录全局非业务异常日志，方便排错
             if (this.logger.isErrorEnabled()) {
