@@ -78,10 +78,10 @@ public class CasualHandlerMethodExceptionResolver extends AbstractHandlerMethodE
         // 其他系统崩溃异常
         else {  
             resp.setServer_status(CasualException.ERROR_DEFAULT);
-            resp.setServer_error("系统崩溃异常！");
+            resp.setServer_error("服务器正在维护或出现异常！");
             // 记录全局非业务异常日志，方便排错
             if (this.logger.isErrorEnabled()) {
-                this.logger.error("系统崩溃异常！", ex);
+                this.logger.error("服务器正在维护或出现异常！", ex);
             }
         }
 

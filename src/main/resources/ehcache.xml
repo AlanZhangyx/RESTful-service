@@ -1,28 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ehcache dynamicConfig="false" monitoring="off" updateCheck="false"
+<!-- 
+	updateCheck
+		是否自动检查ehcache新版本
+	maxBytesLocalHeap
+		堆内存最大字节，单位可以是K、M或G，不区分大小写。默认是0，表示不限制
+		但是当没有指定CacheManager级别的maxBytesLocalHeap时，必须在每一个Cache上指定maxBytesLocalHeap或maxEntriesLocalHeap
+	maxBytesLocalDisk
+		磁盘最大字节，单位可以是K、M或G。默认是0，表示不限制。只有在单机环境下才可以使用本地磁盘，分布式环境下是不可以使用的
+ -->
+<ehcache dynamicConfig="false" monitoring="off" updateCheck="false" maxBytesLocalHeap="64M"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
     
     <!-- 定义缓存策略
-		eternal="false"   				// 元素是否永恒,一但设置了,timeout将不起作用
+		eternal="false"   				// 元素是否永恒,如果是true,过期的设置将不起作用
 		maxElementsInMemory="1000"      // 内存缓存最大个数
-		maxElementsOnDisk=""            // 硬盘最大缓存个数  
-	  	maxEntriesLocalHeap="1000" 		// 堆内存中最大缓存对象数,0没有限制(必须设置)
+	  	memoryStoreEvictionPolicy="LRU" // 当达到maxElementsInMemory时,强制执行的驱逐策略,默认使用"最近最少使用(LRU)"策略,还有先入先出FIFO,一直以来最少使用LFU
+	  	
+	disk:
 	  	overflowToDisk="false"  		// 当缓存达到maxElementsInMemory值是,是否允许溢出到磁盘(必须设置)
-	  	diskPersistent="false"  		// 磁盘缓存在VM重新启动时是否保持(默认为false)
-	  	timeToIdleSeconds="0" 			// 导致元素过期的访问间隔(秒为单位). 当eternal为false时，这个属性才有效，0表示可以永远空闲,默认为0
-	  	timeToLiveSeconds="600" 		// 元素在缓存里存在的时间(秒为单位). 0 表示永远存在不过期
-	  	memoryStoreEvictionPolicy="LFU" // 当达到maxElementsInMemory时,如何强制进行驱逐默认使用"最近使用(LRU)"策略,其它还有先入先出FIFO,最少使用LFU,较少使用LRU
-	  	diskSpoolBufferSizeMB=""        // 这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。  
-	  	diskPersistent="false"          // 是否缓存虚拟机重启期数据,默认否
-	  	diskExpiryThreadIntervalSeconds // 磁盘失效线程运行时间间隔,默认是120秒
+	  	maxElementsOnDisk=""            // 硬盘中最大缓存多少个对象,默认为0
+	  	diskPersistent="false"  		// VM重启后,磁盘缓存是否还保持(默认为false)
+	  	diskExpiryThreadIntervalSeconds // 检测磁盘上失效的对象的线程的运行时间间隔 ,默认是120秒
+	  	diskSpoolBufferSizeMB			// DiskStore使用的磁盘大小，默认值30MB。每个cache使用各自的DiskStore。 
+	  	
+	 当eternal="false"时，这些属性才有效
+	  	timeToIdleSeconds="0" 			// 过期前的空闲时间(秒),0表示可以永远空闲(不过期),默认为0
+	  	timeToLiveSeconds="0" 			// 元素在缓存里存活的时间(秒),0 表示永远存在(不过期),默认0
    -->
    
-   	<!-- 根据操作系统不同而不同的一个临时文件夹 -->
+	<!-- disk
+		user.home -用户的根目录
+		user.dir – 用户的当前工作目录
+		java.io.tmpdir – 默认临时文件路径,根据操作系统而不同
+		ehcache.disk.store.dir – 一个系统属性，你通常用命令行指定；
+		例如： java -Dehcache.disk.store.dir=/u01/myapp/diskdir ... 
+	-->
 	<diskStore path="java.io.tmpdir"/>
+	
+	<!-- 默认的策略
+		内存500个对象,磁盘500的对象
+		对象一直存在，当超过1000时使用LRU驱逐
+	 -->
 	<defaultCache
 	       eternal="false"
-	       maxElementsInMemory="1000"
-	       timeToIdleSeconds="120"
+	       maxElementsInMemory="500"
+	       memoryStoreEvictionPolicy="LRU"
+	       overflowToDisk="true"
+	       maxElementsOnDisk="500"/>
+	
+	<cache name="cache1"
+	       eternal="false"
+	       maxElementsInMemory="500"
+	       timeToIdleSeconds="0"
 	       timeToLiveSeconds="120"
 	       overflowToDisk="true"/>
+	       
+	<cache name="cache2"
+	       eternal="false"
+	       maxElementsInMemory="500"
+	       timeToIdleSeconds="0"
+	       timeToLiveSeconds="120"
+	       overflowToDisk="true"/>
+	       
+ 
 </ehcache>
