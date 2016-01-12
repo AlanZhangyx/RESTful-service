@@ -30,7 +30,7 @@ import net.sf.json.JSONObject;
 @Component
 public class ControllerLogAspect {
 
-	private final Logger LOGGER = Logger.getLogger(ControllerLogAspect.class);
+    private final Logger LOGGER = Logger.getLogger(ControllerLogAspect.class);
 
 	private String requestPath = null; // 请求地址
 	private Map<?, ?> inputParamMap = null; // 传入参数

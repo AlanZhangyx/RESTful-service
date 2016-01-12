@@ -3,7 +3,6 @@ package com.ddup.lib.exception;
 /**
  *  业务异常
  * <br>
- * <strong>copyright</strong>： 2015, 北京都在哪网讯科技有限公司<br>
  * <strong>Time </strong>: 2015年12月29日<br>
  * <strong>History</strong>：<br>
  * Editor　　　version　　　Time　　　　　Operation　　　　　　　Description<br>
@@ -11,7 +10,7 @@ package com.ddup.lib.exception;
  * @author dznzyx
  * @version : 1.0.0
  */
-public class CasualException extends RuntimeException {
+public class DdupException extends RuntimeException {
 
 	/**------------------------------------------ 参数定义 ------------------------------------------**/
 
@@ -33,14 +32,14 @@ public class CasualException extends RuntimeException {
 	private int errorCode = ERROR_DEFAULT;
 	
 	/**------------------------------------------ 构造函数 ------------------------------------------**/
-	public CasualException(){
+	public DdupException(){
 		super();
 	}
 	
 	/**
 	 * @param errorCode
 	 */
-	public CasualException(int errorCode){
+	public DdupException(int errorCode){
 		super();
 		this.setErrorCode(errorCode);
 	}
@@ -49,7 +48,7 @@ public class CasualException extends RuntimeException {
 	 * @param errorCode
 	 * @param msg
 	 */
-	public CasualException(int errorCode, String msg){
+	public DdupException(int errorCode, String msg){
 		super(msg);
 		this.setErrorCode(errorCode);
 	}
@@ -58,7 +57,7 @@ public class CasualException extends RuntimeException {
 	 * @param msg
 	 * @param throwable
 	 */
-	public CasualException(String msg, Throwable throwable){
+	public DdupException(String msg, Throwable throwable){
 		super(msg, throwable);
 		
 	}
@@ -68,7 +67,7 @@ public class CasualException extends RuntimeException {
 	 * @param msg
 	 * @param throwable
 	 */
-	public CasualException(int errorCode, String msg, Throwable throwable){
+	public DdupException(int errorCode, String msg, Throwable throwable){
 		super(msg, throwable);
 		this.setErrorCode(errorCode);
 	}
@@ -76,7 +75,7 @@ public class CasualException extends RuntimeException {
     /**
      * @param throwable
      */
-    public CasualException(Throwable throwable) {
+    public DdupException(Throwable throwable) {
         super(throwable);
     }
 
@@ -84,7 +83,7 @@ public class CasualException extends RuntimeException {
      * @param errorCode
      * @param throwable
      */
-    public CasualException(int errorCode, Throwable throwable) {
+    public DdupException(int errorCode, Throwable throwable) {
         super(throwable);
         this.setErrorCode(errorCode);
     }
