@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class Tools {
 
@@ -157,7 +158,7 @@ public class Tools {
 	}
 
 	/**
-	 * 第2中方法
+	 * 第2种方法
 	 * @Title
 	 * @Description
 	 * @param message
@@ -202,5 +203,26 @@ public class Tools {
 			md5str.append(Integer.toHexString(digital));
 		}
 		return md5str.toString();
+	}
+	
+	/**
+	 * 获得32位随机UUID
+	 * @Title
+	 * @Description
+	 * @return
+	 * @TestUrl
+	 */
+	public static String getUUID(){
+		String uid = UUID.randomUUID().toString();
+		return uid.substring(0, 8) + uid.substring(9, 13) + uid.substring(14, 18) + 
+		uid.substring(19, 23) + uid.substring(24, 36);
+	}
+	
+	public static final String generate32Token(){
+		
+		
+		//UUID.nameUUIDFromBytes(name)
+		
+		return null;
 	}
 }
