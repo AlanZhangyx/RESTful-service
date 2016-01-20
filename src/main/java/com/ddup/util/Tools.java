@@ -13,11 +13,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class Tools {
 
 	public static boolean isAllLetter(String str) {
 		boolean isWord = str.matches("[a-zA-Z]+");
 		return isWord;
+	}
+	
+	/**
+	 * 获取IP地址
+	 * @Title
+	 * @Description
+	 * @param request
+	 * @return
+	 * @TestUrl
+	 */
+	public static final String getIP(HttpServletRequest request){
+		String ip = request.getHeader("x-forwarded-for");
+		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+			ip = request.getRemoteAddr();
+		}
+		ip = ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip;
+		return ip;
 	}
 
 	/**
@@ -225,4 +250,5 @@ public class Tools {
 		
 		return null;
 	}
+	
 }
