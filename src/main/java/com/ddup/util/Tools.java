@@ -91,60 +91,61 @@ public class Tools {
 	}
 
 	/**
-	 * Bean转Map 1. 可以指定源Bean属性是驼峰的还是下划线的 2. 可以指定目标Map属性是驼峰还是下划线的
-	 * 
+	 * Bean转Map
+	 * 1. 可以指定源Bean属性是驼峰的还是下划线的
+	 * 2. 可以指定目标Map属性是驼峰还是下划线的
 	 * @Title
 	 * @Description
 	 * @param obj
-	 * @param isCamelBean
-	 * @param isCamelMap
+	 * @param sourceIsCamelBean
+	 * @param targetIsCamelMap
 	 * @return
 	 * @TestUrl
 	 */
-	public static Map<String, Object> transBeanToMap(Object obj, boolean isCamelBean, boolean isCamelMap) {
-		if (obj == null) {
-			return null;
-		}
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
-			PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-			for (PropertyDescriptor property : propertyDescriptors) {
-				String key = property.getName();
-				if (!key.equals("class")) {// 过滤class属性
-					Method getter = property.getReadMethod();// 得到property对应的getter方法
-					Object value = getter.invoke(obj);
-					// 驼峰和下划线命名的处理
-					StringBuilder sb = null;
-					if (isCamelBean && !isCamelMap) {// bean是驼峰而目标map是_
-						sb = new StringBuilder();
-						for (int i = 0; i < key.length(); i++) {
-							if (Character.isUpperCase(key.charAt(i))) {
-								sb.append('_');
-								sb.append(Character.toLowerCase(key.charAt(i)));// 小写并追加
-							} else {
+	public static Map<String, Object> transBeanToMap(Object obj, boolean sourceIsCamelBean, boolean targetIsCamelMap) {
+        if(obj == null){  
+            return null;  
+        }          
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {  
+            BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());  
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+            for (PropertyDescriptor property : propertyDescriptors) {
+                String key = property.getName();
+                if (!key.equals("class")) {// 过滤class属性  
+                    Method getter = property.getReadMethod();// 得到property对应的getter方法  
+                    Object value = getter.invoke(obj);
+                    //驼峰和下划线命名的处理
+                    StringBuilder sb = null;
+                    if (sourceIsCamelBean && !targetIsCamelMap) {//bean是驼峰而目标map是_
+                    	sb = new StringBuilder();
+        				for (int i = 0; i < key.length(); i++) {
+    						if (Character.isUpperCase(key.charAt(i))) {
+    							sb.append('_');
+								sb.append(Character.toLowerCase(key.charAt(i)));//小写并追加
+							}else {
 								sb.append(key.charAt(i));
 							}
-						}
-					} else if (!isCamelBean && isCamelMap) {// bean是_目标map是驼峰，本项目一般用这个
-						sb = new StringBuilder();
-						for (int i = 0; i < key.length(); i++) {
-							if (key.charAt(i) == '_') {
-								i++;// 跳过_
-								sb.append(Character.toUpperCase(key.charAt(i)));// 大写并追加
-							} else {
+    					}
+        			}else if (!sourceIsCamelBean && targetIsCamelMap) {//bean是_目标map是驼峰，本项目一般用这个
+        				sb = new StringBuilder();
+        				for (int i = 0; i < key.length(); i++) {
+    						if (key.charAt(i) == '_') {
+								i++;//跳过_
+								sb.append(Character.toUpperCase(key.charAt(i)));//大写并追加
+							}else {
 								sb.append(key.charAt(i));
 							}
-						}
-					}
-					// 加入map
-					map.put(sb.toString(), value);
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("transBean2Map Error " + e);
-		}
-		return map;
+    					}
+        			}
+                    //加入map
+                    map.put(sb.toString(), value);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("transBean2Map Error " + e);  
+        }
+        return map;
 	}
 
 	/**

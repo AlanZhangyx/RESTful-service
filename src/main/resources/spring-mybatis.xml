@@ -52,7 +52,7 @@
     
     <!-- 配置扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 扫描包以及它的子包下的所有映射接口类(*Mapper接口) -->
+        <!-- 扫描包以及它的子包下的所有映射接口类(*Mapper接口),纳入范围的interface必须都是mapper不要有service等 -->
         <property name="basePackage" 
             value="com.ddup.base.dao,
             com.ddup.istar.dao,
