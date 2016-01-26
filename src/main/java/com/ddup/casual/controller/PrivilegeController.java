@@ -23,7 +23,7 @@ import com.ddup.casual.dto.resp.PrivilegeResp01;
  * @version : 1.0.0
  */
 @Controller
-@RequestMapping(value = "/pri", method = { RequestMethod.GET,RequestMethod.PUT })
+@RequestMapping(value = "/pri", method = { RequestMethod.GET,RequestMethod.POST })
 public class PrivilegeController extends BaseController{
 		
 	@RequestMapping(value = "/list")
