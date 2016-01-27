@@ -45,10 +45,11 @@ public class PrivilegeController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/test/list")
-	public void testList(){
+	public @ResponseBody List<Privilege> testList(){
 		List<Privilege> list = priDao.list();
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).getId());
 		}
+		return list;
 	}
 }

@@ -39,6 +39,7 @@
         <property name="removeAbandonedTimeout" value="1800" />
         <!-- 关闭abanded连接时输出错误日志 -->
         <property name="logAbandoned" value="true" />
+        <property name="connectionInitSqls" value="set names utf8mb4;" />
     </bean>
 
     <!-- +++++++++++++++++++++++++++++++++++++ myBatis的配置项 +++++++++++++++++++++++++++++++++++++ -->
@@ -55,8 +56,8 @@
         <!-- 扫描包以及它的子包下的所有映射接口类(*Mapper接口),纳入范围的interface必须都是mapper不要有service等 -->
         <property name="basePackage" 
             value="com.ddup.base.dao,
-            com.ddup.istar.dao,
-            com.ddup.user.dao" />
+            com.ddup.casual.dao,
+            com.ddup.util.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 
