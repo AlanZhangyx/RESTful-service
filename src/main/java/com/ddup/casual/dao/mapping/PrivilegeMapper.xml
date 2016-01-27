@@ -88,12 +88,8 @@
 			<if test="description != null">
 				description,
 			</if>
-			<if test="createTime != null">
 				create_time,
-			</if>
-			<if test="updateTime != null">
-				update_time,
-			</if>
+				update_time
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			#{id,jdbcType=INTEGER},
@@ -115,12 +111,8 @@
 			<if test="description != null">
 				#{description,jdbcType=VARCHAR},
 			</if>
-			<if test="createTime != null">
-				#{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null">
-				#{updateTime,jdbcType=TIMESTAMP},
-			</if>
+			NOW(),
+			NOW()
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.ddup.casual.dao.model.Privilege">
@@ -169,4 +161,8 @@
 		update_time = #{updateTime,jdbcType=TIMESTAMP}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	
+	<select id="list" resultMap="BaseResultMap">
+		select * from sys_privilege limit 0,10
+	</select>	
 </mapper>
