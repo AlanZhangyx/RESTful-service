@@ -1,9 +1,9 @@
 package com.ddup.base.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 基础Controller

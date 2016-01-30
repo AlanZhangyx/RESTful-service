@@ -30,7 +30,7 @@
     </bean>
     
     <!-- 基于请求参数(default:locale)的国际化拦截器，这里是spring validate最终会调用 -->
-    <bean id="localeResolver" class="com.ddup.lib.CasualLocaleResolver"/>    
+    <bean id="localeResolver" class="com.ddup.lib.DdupLocaleResolver"/>    
     
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
     <!-- 1. 映射处理器 -->

@@ -28,6 +28,13 @@ public class PrivilegeController extends BaseController{
 		
 	@RequestMapping(value = "/list")
 	public @ResponseBody PrivilegeResp01 queryList(@Validated(QueryList.class) PrivilegeReq dtoReq){
+		System.out.println("111");
+		return new PrivilegeResp01();
+	}
+	
+	@RequestMapping(value = "/test")
+	public @ResponseBody PrivilegeResp01 queryList(){
+		System.out.println("12");
 		return new PrivilegeResp01();
 	}
 }
