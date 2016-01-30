@@ -1,5 +1,7 @@
 package com.ddup.casual.dao;
 
+import java.util.List;
+
 import com.ddup.casual.dao.model.Privilege;
 
 public interface PrivilegeMapper {
@@ -50,4 +52,6 @@ public interface PrivilegeMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Privilege record);
+    
+    List<Privilege> list();
 }
