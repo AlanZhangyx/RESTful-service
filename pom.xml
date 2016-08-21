@@ -85,6 +85,7 @@
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency> -->
+        <!-- webmvc依赖web，所以如果需要webmvc就不需要显式声明web了 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
