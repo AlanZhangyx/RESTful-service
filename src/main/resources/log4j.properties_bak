@@ -1,0 +1,45 @@
+### set log levels ###
+log4j.rootLogger = info,STDOUT,FILE,logstash
+
+log4j.logger.velocity=ERROR,VELOCITY
+log4j.logger.org.apache.velocity=OFF
+
+### \u8f93\u51fa\u5230\u63a7\u5236\u53f0 ###
+log4j.appender.STDOUT = org.apache.log4j.ConsoleAppender
+log4j.appender.STDOUT.Target = System.out
+log4j.appender.STDOUT.layout = org.apache.log4j.PatternLayout
+log4j.appender.STDOUT.Threshold = info 
+log4j.appender.STDOUT.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m%n
+
+##\u8f93\u51fa\u5230\u6587\u4ef6
+log4j.appender.FILE=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.FILE.File=/data/logs/mds-web/mds-web.log
+log4j.appender.FILE.DatePattern='.'yyyy-MM-dd
+log4j.appender.FILE.layout=org.apache.log4j.PatternLayout
+log4j.appender.FILE.layout.ConversionPattern=%d %m%n
+
+##velocity
+log4j.appender.VELOCITY=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.VELOCITY.File=/data/logs/mds-web/mds-web-velocity.log
+log4j.appender.VELOCITY.Append=false
+log4j.appender.VELOCITY.Encoding=UTF-8
+log4j.appender.VELOCITY.layout=org.apache.log4j.PatternLayout
+log4j.appender.VELOCITY.layout.ConversionPattern=[%-4p] %d{MM-dd HH:mm} - %m  %n
+
+#\u767b\u5f55\u65e5\u5fd7
+log4j.logger.userLoginLogger=INFO,userLoginLogger
+log4j.additivity.userLoginLogger=false
+log4j.appender.userLoginLogger=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.userLoginLogger.DatePattern='.'yyyyMMdd
+log4j.appender.userLoginLogger.File=/data/logs/lagou-passport/userLoginLogger.log
+log4j.appender.userLoginLogger.layout=org.apache.log4j.PatternLayout
+log4j.appender.userLoginLogger.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} | %m%n
+
+
+# ELK
+#log4j.appender.logstash=org.apache.log4j.net.SocketAppender
+#log4j.appender.logstash.Port=4560
+#log4j.appender.logstash.RemoteHost=10.1.200.67
+#log4j.appender.logstash.ReconnectionDelay=10000
+#log4j.appender.logstash.LocationInfo=true
+#log4j.appender.logstash.Threshold=INFO
