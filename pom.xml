@@ -333,7 +333,17 @@
                 </configuration>
             </plugin>
             
-            <!-- 4. 打包插件个性化配置 -->
+            <!-- 4. 直接跳过测试，省去手动输入参数了 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            
+            <!-- 5. 打包插件个性化配置 -->
             <!-- package命令根据不同的包格式ejb/jar/rar/war选择不同的插件,这里配置war打包插件 -->
             <plugin>
 				<groupId>org.apache.maven.plugins</groupId>

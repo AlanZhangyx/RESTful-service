@@ -1,6 +1,9 @@
 package com.ddup.casual.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,5 +61,18 @@ public class PrivilegeController extends BaseController{
 			System.out.println(list.get(i).getId());
 		}
 		return list;
+	}
+	
+	@RequestMapping(value = "/test/json")
+	public @ResponseBody Map<String, Object> testJson(){
+		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> attributeMap = new HashMap<String, Object>();
+		Map<String, Object> object = new HashMap<String, Object>();
+		object.put("haha", 123);
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		list.add(object);
+		attributeMap.put("list_a", list);
+		result.put("map", attributeMap);
+		return result;
 	}
 }

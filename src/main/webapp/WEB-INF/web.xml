@@ -80,7 +80,13 @@
 		<url-pattern>*.xml</url-pattern>
 		<url-pattern>*.htm</url-pattern>
 		<url-pattern>*.html</url-pattern>
+		<!-- 或者按文件夹匹配 -->
+		<url-pattern>/js/*</url-pattern>
+	    <url-pattern>/css/*</url-pattern>
+	    <url-pattern>/images/*</url-pattern>
 	</servlet-mapping>
+	
+
 
 	<!-- session-timeout 20 min -->
 	<session-config>
